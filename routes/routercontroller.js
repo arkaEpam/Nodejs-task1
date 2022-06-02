@@ -13,21 +13,19 @@ const middleware = require("../middleware");
 
 const router = express.Router();
 
-router.get("/getUser/:id", middleware.validId, getUser);
+router.get("/getUser/:id", getUser);
 router.get("/getUser/:loginSubStr/:limit", getAutoSuggestUser);
 router.post(
     "/saveUser",
     middleware.validation, //check the validation of the data
-    middleware.isUserExist, // if id is valid don't proceed
     saveUser
 );
 router.put(
     "/updateUser/:id",
     middleware.validation, //check the validation of the data
-    middleware.validId, // if id is valid proceed
     updateUser
 );
-router.delete("/deleteUser/:id", middleware.validId, deleteUser);
+router.delete("/deleteUser/:id", deleteUser);
 
 router.use("/*", (req, res) => {
     res.statusCode = 404;
